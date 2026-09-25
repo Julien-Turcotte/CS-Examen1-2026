@@ -309,6 +309,19 @@ namespace ChocolaterieDeWilly.Models
         /// <param name="lot">Le lot qui vient d'être terminé.</param>
         private void CacherTickets(LotProduction lot)
         {
+            _compteurUnites += lot.Creation.Quantite;
+            int compteurTemp = _compteurUnites;
+
+            // passe par les multiples de MaxTicket et assigne un ticket si il n'est pas déjà assigné
+            while (compteurTemp > IntervalleTicket) {
+                compteurTemp -= IntervalleTicket;
+
+                if (MaxTicketsOr > TicketsCaches)
+                {
+                    lot.AjouterTicket(TicketsCaches + 1);
+                    TicketsCaches++;
+                }
+            }
         }
     }
 }
