@@ -150,6 +150,7 @@ namespace ChocolaterieDeWilly.Models
             {
                 throw new ReserveInsuffisanteException("La réserve de chocolat est insuffisante.");
             }
+            lot.Creation.Quantite = nouvelleQuantite; // ajoute la nouvelle quantité
 
         }
 
@@ -225,7 +226,7 @@ namespace ChocolaterieDeWilly.Models
 
             Masse requisConverti = chocolatRequis.ConvertirEn(ReserveChocolat.Unite);
             ReserveChocolat = new Masse(ReserveChocolat.Valeur - requisConverti.Valeur, ReserveChocolat.Unite);
-
+            lot.Statut = StatutLot.Termine; // changer le status pour terminé
             CacherTickets(lot);
         }
 
